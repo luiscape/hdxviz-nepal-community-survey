@@ -47,8 +47,11 @@ mergeAll <- function() {
   select_data <- intermediate[select_columns, ]
   
   if (as.numeric(summary(names(select_data) %in% names(intermediate))[[3]]) / length(names(select_data)) == 0) {
-    result <- rbind(intermediate, select_data)
-    return(result)
+    intermediate_result <- rbind(intermediate, select_data)
+    select_names <- data.frame(table_names = names(select_data), intermediate = names(intermediate_result) %in% names(intermediate_result))
+    select_columns <- filter(select_names, intermediate == TRUE)$table_names
+    final_result <- intermediate_result
+    return(final_result)
   } else {
     stop('Checking for the same column names on the latest survey failed.')
   }
