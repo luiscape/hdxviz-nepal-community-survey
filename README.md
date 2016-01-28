@@ -1,6 +1,6 @@
 ## Sample Visualization
 
-![thumbnail](thumnail.png "Screengrab")
+![thumbnail](thumbnail.png "Screengrab")
 
 This is a sample visualization used for training purposes. It uses the results from Flowminder models and creates an interactive visualization that allows for multi-dimensional filtering of many of the models variables.
 
