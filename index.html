@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<head>
+    <!--
+
+    METADATA: ====================================
+
+    HTML metadata for the visualization. Important
+    SEO information goes in here.
+
+    ==============================================
+
+    -->
+    <title>Nepal | Community Perceptions Survey</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+
+    STYLES: ========================================
+
+    Here we are loading CSS files for both the charts
+    and the page styles.
+
+    =================================================
+
+    -->
+    <link rel="stylesheet" type="text/css" href="http/css/vendor/bootstrap/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="http/css/style.css">
+    <link rel="stylesheet" type="text/css" href="http/css/dc.min.css">
+    <link rel="stylesheet" type="text/css" href="http/css/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="http/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="http/css/pace.css">
+    <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Raleway:700,400,200,100">
+    <!--
+
+    CHARTING LIBRARIES: ========================================
+
+    Here we load the latest version of D3.js, DC.js
+    and their dependencies.
+
+    ============================================================
+
+    -->
+    <script type="text/javascript" src="http/js/jquery.js"></script>
+    <script type="text/javascript" src="http/js/d3.min.js"></script>
+    <script type="text/javascript" src="http://d3js.org/queue.v1.min.js"></script>
+    <script type="text/javascript" src="http/js/topojson.js"></script>
+    <script type="text/javascript" src="http/js/crossfilter.min.js"></script>
+    <script type="text/javascript" src="http/js/dc.min.js"></script>
+    <script type="text/javascript" src="http/js/pace.min.js"></script>
+    <script type="text/javascript" src="http/js/leaflet.js"></script>
+    <script type="text/javascript" src="http/js/dc-leaflet.js"></script>
+    <script type="text/javascript" src="http/js/dc-leaflet.js"></script>
+    <!--
+
+    LOADING DATA: ==============================================
+
+    Here we load some of the data directly into JavaScript's
+    namespace. Larger datasets are loaded directly by D3 (using
+    d3.json or d3.csv). However, to speed-up the process we
+    use this trick so that smaller datasets are available
+    as variables, without the need for parsing.
+
+    We are currently loading the following data:
+
+      - adm0.js: Nepal country contour.
+      - colorbrewer.js: a series of color arrays from Color Brewer 2.
+
+    ============================================================
+
+    -->
+    <script type="text/javascript" src="http/data/adm0.js"></script>
+    <script type="text/javascript" src="http/js/colorbrewer.js"></script>
+    <!--
+
+    APPLICATION: ================================================
+
+    Here we load the DC.js application. The application will
+    refer to the data loaded previously in this document,
+    and will generate the charts and maps dynamically using
+    element IDs.
+
+    ============================================================
+
+    -->
+    <script type="text/javascript" src="http/js/app.js"></script>
+</head>
+
+<body>
+    <!--
+
+    LAYOUT: ===================================================
+
+    This section organizes the elements of the document and
+    adds IDs that will be populated with dynamically generated
+    elements from app.js
+
+    ============================================================
+
+    -->
+    <div class="top-bar"></div>
+    <div class="container-fluid">
+        <div class="col-lg-4 col-md-12 col-sm-12 sidebar pad2 whiteBackground">
+            <div class="bikes-panel">
+                <div>
+                    <div style='padding-bottom: 20px;'>
+                        <a href="http://hdx.rwlabs.org">
+                            <img src='http/img/hdx-logo.svg'>
+                        </a>
+                    </div>
+                    <h1 style="padding-bottom: 20px;">Nepal: Community Perceptions Survey</h1>
+                    <p>
+                        This prototype visualizes the Community Perceptions Survey done in the affected regions after the Nepal earthquake
+                    </p>
+                    <a class="btn btn-primary" href="https://data.hdx.rwlabs.org/organization/nepal-unrchco?sort=metadata_modified+desc" target="_blank">Download Dataset from HDX</a>
+                    <a class="reset btn btn-primary" onclick="clearAllFilters();">Clear Selection</a>
+                </div>
+                <div id="plot"></div>
+                <div class="row">
+                    <div class="col-xs-4 col-push-sm-12"></div>
+                </div>
+                <div class="row row-padding" style="padding-top: 20px;">
+                    <h4><strong>Population Demographics</strong></h4>
+                    <p>
+                        <span class="fa fa-info-circle"></span> <span><i>Ethnicity.</i></span>
+                    </p>
+                    <div id="ethnicity_chart"></div>
+                </div>
+                <div class="row row-padding">
+                    <p>
+                        <span class="fa fa-info-circle"></span> <span><i>Occupation.</i></span>
+                    </p>
+                    <div id="occupation_chart"></div>
+                </div>
+                <div class="row row-padding">
+                    <p>
+                        <span class="fa fa-info-circle"></span> <span><i>Age.</i></span>
+                    </p>
+                    <div id="age_chart"></div>
+                </div>
+            </div>
+            <div class="row listings">
+                <div id='listings' class='listings'></div>
+            </div>
+        </div>
+        <!--
+
+        MAP AREA: =================================================
+
+        Here we render the map. We are also considering rendering
+        other
+
+        ============================================================
+
+        -->
+        <div class="col-lg-8 map pad2">
+            <div class="row row-padding">
+                <div>
+                    <h4><strong>Respondents Map</strong></h4>
+                </div>
+
+                <div>
+                    <ul class="timeline" id="timeline">
+                      <li class="li" onclick="filterRound(1);">
+                        <div class="timestamp">
+                          <span class="author">1304</span>
+                          <span class="date">responses<span>
+                        </div>
+                        <div class="status">
+                          <h4>Round 1</h4>
+                        </div>
+                      </li>
+                      <li class="li" onclick="filterRound(2);">
+                        <div class="timestamp">
+                          <span class="author">1398</span>
+                          <span class="date">responses<span>
+                        </div>
+                        <div class="status">
+                          <h4>Round 2</h4>
+                        </div>
+                      </li>
+                      <li class="li" onclick="filterRound(3);">
+                        <div class="timestamp">
+                          <span class="author">1400</span>
+                          <span class="date">responses<span>
+                        </div>
+                        <div class="status">
+                          <h4>Round 3</h4>
+                        </div>
+                      </li>
+                      <li class="li" onclick="filterRound(4);">
+                        <div class="timestamp">
+                          <span class="author">1400</span>
+                          <span class="date">responses<span>
+                        </div>
+                        <div class="status">
+                          <h4>Round 4</h4>
+                        </div>
+                      </li>
+                     </ul>
+                </div>
+
+
+
+
+                <div class="number-of-records-tooltip">
+                    <div id="count-info">
+                        <span class="fa fa-info-circle"></span> <span class="filter-count status-number"></span> of <span class="total-count"></span> <span><i>respondents</i></span>
+                    </div>
+                </div>
+                <div id="map"></div>
+            </div>
+            <div class="row row-padding">
+                <div>
+                    <h4><strong>Responses</strong></h4>
+                </div>
+
+                <div class="col-md-6">
+                    <p>
+                        <span class="fa fa-info-circle"></span> <span><i>Are your main problems being addressed? <br/>(Answer on a scale of 1-5).</i></span>
+                    </p>
+                    <div id="A0JS"></div>
+                </div>
+
+                <div class="col-md-6">
+                    <p>
+                        <span class="fa fa-info-circle"></span> <span><i>What is your biggest problem?</i></span>
+                    </p>
+                    <div id="A1JS"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
