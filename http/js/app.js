@@ -133,7 +133,8 @@ var loadData = function () {
       occupation_chart
         .width(300)
         .height(200)
-        .colors(['#cccccc'])
+        .colors(['#8C510A'])
+        .colorAccessor(function (d, i) { return i })
         .margins({top: 20, left: 30, right: 30, bottom: 20})
         .dimension(cf.occupation)
         .group(occupations)
@@ -195,7 +196,7 @@ var loadData = function () {
         .renderVerticalGridLines(true)
         .elasticY(true)
         .elasticX(false)
-        .x(d3.scale.ordinal().domain(['clean_water', 'financial_support', 'education', 'food', 'healthcare', 'livelihoods', 'housing_inspections', 'long_term_shelter__housing', 'other', 'psychosocial_counseling', 'seeds_and_fertilizers', 'short_term_shelter__tent_shelt', 'toilets_sanitation', 'short_term_she', '']))
+        .x(d3.scale.ordinal().domain(['long_term_shelter__housing', 'short_term_shelter__tent_shelt', 'financial_support', 'seeds_and_fertilizers', 'housing_inspections', 'clean_water', 'education', 'food', 'healthcare', 'livelihoods', 'other', 'psychosocial_counseling', 'toilets_sanitation', 'short_term_she', '']))
         .xUnits(dc.units.ordinal)
         .xAxis().tickFormat()
 

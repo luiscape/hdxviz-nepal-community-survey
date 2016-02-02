@@ -219,12 +219,22 @@ div.tooltip {
   float: left;
 }
 
-#occupation_chart > svg > g text {
+/*#occupation_chart > svg > g text {
   fill: #404040;
+}*/
+
+/*#occupation_chart > svg > g > g.axis > g {
+  fill: none;
+}*/
+
+#A0JS .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
 }
 
-#occupation_chart > svg > g > g.axis > g {
-  fill: none;
+#A1JS .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
 }
 
 /* station.css */
