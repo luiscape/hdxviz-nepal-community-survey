@@ -78,20 +78,19 @@ mergeAll <- function() {
                                 A0JS, A1JS, A2JS, A3JS, B0JS, C0JS, C1JS, C2JS,
                                 D0JS, E0JS, Round)
   
-  
-  if (as.numeric(summary(names(select_data) %in% names(intermediate))[[3]]) / length(names(select_data)) == 0) {
-    results <- rbind(select_intermediate, select_round4)
-    return(results)
-  } else {
-    stop('Checking for the same column names on the latest survey failed.')
-  }
+  results <- rbind(select_intermediate, select_round4)
+  return(results)
 }
 
 #
 # Clean the dataset and select variables.
 #
 cleanAndSelect <- function(df) {
-  df <- select(df, Round, Date, District, Ward, Age, Ethnicity, Ethnicity_Other, Occupation, Occupation_Other, Do_you_have_any_health_problem, A0JS, A1JS, B0JS, C0JS, C1JS, D0JS, E0JS)
+  df <- select(df, 
+               Round, Date, Gender, District, 
+               Ward, Age, Ethnicity, Ethnicity_Other, 
+               Occupation, Occupation_Other, Do_you_have_any_health_problem, 
+               A0JS, A1JS, B0JS, C0JS, C1JS, D0JS, E0JS)
   
   df$District <- capitalize(as.character(df$District))
   df$Ethnicity <- capitalize(as.character(df$Ethnicity))
@@ -107,18 +106,156 @@ cleanAndSelect <- function(df) {
   df$Occupation <- ifelse(df$Occupation == 'skilled_worker__i_e__carpenter', 'Skilled Worker (i.e. Carpenter)', df$Occupation)
   df$Occupation <- ifelse(df$Occupation == 'skilled_worker', 'Skilled Worker (i.e. Carpenter)', df$Occupation)
   df$Occupation <- ifelse(df$Occupation == 'government_ser', 'Government Servant', df$Occupation)
+  df$Occupation <- ifelse(df$Occupation == 'other', 'Other', df$Occupation)
   
+  #
+  #  Cleaning Age.
+  #
+  df$Age <- as.character(df$Age)
+  df$Age <- ifelse(df$Age == '15_24', '15 to 24', df$Age)
+  df$Age <- ifelse(df$Age == '25_39', '25 to 39', df$Age)
+  df$Age <- ifelse(df$Age == '40_54', '40 to 54', df$Age)
+  df$Age <- ifelse(df$Age == '55', '55+', df$Age)
+  df$Age <- ifelse(df$Age == '55_greater', '55+', df$Age)
+  df$Age <- ifelse(df$Age == '25-39', '25 to 39', df$Age)
+  df$Age <- ifelse(df$Age == '40-54', '40 to 54', df$Age)
+  df$Age <- ifelse(df$Age == 'don_t_know', "Don't know", df$Age)
+  df$Age <- ifelse(df$Age == 'refused', 'Refused', df$Age)
+  
+  #
+  #  Cleaning 'Do you have any health problems' entries.
+  #
   df$Do_you_have_any_health_problem <- as.character(df$Do_you_have_any_health_problem)
   df$Do_you_have_any_health_problem <- ifelse(df$Do_you_have_any_health_problem == 'no_difficulty', 'No difficulty.', df$Do_you_have_any_health_problem)
   df$Do_you_have_any_health_problem <- ifelse(df$Do_you_have_any_health_problem == 'yes__some_diff', 'Yes, some difficulty.', df$Do_you_have_any_health_problem)
   df$Do_you_have_any_health_problem <- ifelse(df$Do_you_have_any_health_problem == 'yes__a_lot_of_', 'Yes, a lot of difficulty.', df$Do_you_have_any_health_problem)
   df$Do_you_have_any_health_problem <- ifelse(df$Do_you_have_any_health_problem == 'cannot_do_at_a', 'Cannot do at all.', df$Do_you_have_any_health_problem)
   
+  #
+  #  Cleaning A0JS
+  #
+  df$A0JS <- as.character(df$A0JS)
+  df$A0JS <- ifelse(df$A0JS == '1___not_at_all', 'Not at all', df$A0JS)
+  df$A0JS <- ifelse(df$A0JS == '2___very_little', 'Very little', df$A0JS)
+  df$A0JS <- ifelse(df$A0JS == '3___neutral', 'Neutral', df$A0JS)
+  df$A0JS <- ifelse(df$A0JS == '4___mostly_yes', 'Mostly yes', df$A0JS)
+  df$A0JS <- ifelse(df$A0JS == '5___completely_yes', 'Completely yes', df$A0JS)
+  df$A0JS <- ifelse(df$A0JS == 'don_t_know', "Don't know", df$A0JS)
+  df$A0JS <- ifelse(df$A0JS == 'refused', "Refused", df$A0JS)
+  
+  
+  #
+  #  Cleaning A1JS
+  #
+  df$A1JS <- as.character(df$A1JS)
+  for (i in 1:nrow(df)) {
+    entry = df$A1JS[i]
+    df$A1JS[i] <- capitalize(gsub("_", " ", entry))
+    df$A1JS[i] <- gsub("  ", " / ", df$A1JS[i])
+  }
+  
+  #
+  #  Cleaning A2JS
+  #
+#   df$A2JS <- as.character(df$A2JS)
+#   for (i in 1:nrow(df)) {
+#     entry = df$A2JS[i]
+#     df$A2JS[i] <- capitalize(gsub("_", " ", entry))
+#     df$A2JS[i] <- gsub("  ", " / ",df$A2JS[i])
+#   }
+  
+  #
+  #  Cleaning A3JS
+  #
+#   df$A3JS <- as.character(df$A3JS)
+#   for (i in 1:nrow(df)) {
+#     entry = df$A3JS[i]
+#     df$A3JS[i] <- capitalize(gsub("_", " ", entry))
+#     df$A3JS[i] <- gsub("  ", " / ", df$A3JS[i])
+#   }
+  
+  #
+  #  Cleaning B0JS
+  #
+  df$B0JS <- as.character(df$B0JS)
+  df$B0JS <- ifelse(df$B0JS == '1___not_at_all', 'Not at all', df$B0JS)
+  df$B0JS <- ifelse(df$B0JS == '2___very_little', 'Very little', df$B0JS)
+  df$B0JS <- ifelse(df$B0JS == '3___neutral', 'Neutral', df$B0JS)
+  df$B0JS <- ifelse(df$B0JS == '4___mostly_yes', 'Mostly yes', df$B0JS)
+  df$B0JS <- ifelse(df$B0JS == '5___completely_yes', 'Completely yes', df$B0JS)
+  df$B0JS <- ifelse(df$B0JS == 'don_t_know', "Don't know", df$B0JS)
+  df$A0JS <- ifelse(df$B0JS == 'refused', "Refused", df$B0JS)
+  
+  #
+  #  Cleaning C0JS
+  #
+  df$C0JS <- as.character(df$C0JS)
+  df$C0JS <- ifelse(df$C0JS == '1___not_at_all', 'Not at all', df$C0JS)
+  df$C0JS <- ifelse(df$C0JS == '2___very_little', 'Very little', df$C0JS)
+  df$C0JS <- ifelse(df$C0JS == '3___neutral', 'Neutral', df$C0JS)
+  df$C0JS <- ifelse(df$C0JS == '4___mostly_yes', 'Mostly yes', df$C0JS)
+  df$C0JS <- ifelse(df$C0JS == '5___completely_yes', 'Completely yes', df$C0JS)
+  df$C0JS <- ifelse(df$C0JS == 'don_t_know', "Don't know", df$C0JS)
+  df$A0JS <- ifelse(df$C0JS == 'refused', "Refused", df$C0JS)
+  
+  #
+  #  Cleaning C1JS
+  #
+  df$C1JS <- as.character(df$C1JS)
+  for (i in 1:nrow(df)) {
+    entry = df$C1JS[i]
+    df$C1JS[i] <- capitalize(gsub("_", " ", entry))
+    df$C1JS[i] <- gsub("  ", " / ", df$C1JS[i])
+  }
+  
+  #
+  #  Cleaning C2JS
+  #
+#   df$C1JS <- as.character(df$C2JS)
+#   for (i in 1:nrow(df)) {
+#     entry = df$C2JS[i]
+#     df$C2JS[i] <- capitalize(gsub("_", " ", entry))
+#     df$C2JS[i] <- gsub("  ", " / ", df$C2JS[i])
+#   }
+  
+  #
+  #  Cleaning D0JS
+  #
+  df$D0JS <- as.character(df$D0JS)
+  df$D0JS <- ifelse(df$D0JS == '1___not_at_all', 'Not at all', df$D0JS)
+  df$D0JS <- ifelse(df$D0JS == '2___very_little', 'Very little', df$D0JS)
+  df$D0JS <- ifelse(df$D0JS == '3___neutral', 'Neutral', df$D0JS)
+  df$D0JS <- ifelse(df$D0JS == '4___mostly_yes', 'Mostly yes', df$D0JS)
+  df$D0JS <- ifelse(df$D0JS == '5___completely_yes', 'Completely yes', df$D0JS)
+  df$D0JS <- ifelse(df$D0JS == 'don_t_know', "Don't know", df$D0JS)
+  df$A0JS <- ifelse(df$D0JS == 'refused', "Refused", df$D0JS)
+  
+  #
+  #  Cleaning E0JS
+  #
+  df$E0JS <- as.character(df$E0JS)
+  df$E0JS <- ifelse(df$E0JS == '1___not_at_all', 'Not at all', df$E0JS)
+  df$E0JS <- ifelse(df$E0JS == '2___very_little', 'Very little', df$E0JS)
+  df$E0JS <- ifelse(df$E0JS == '3___neutral', 'Neutral', df$E0JS)
+  df$E0JS <- ifelse(df$E0JS == '4___mostly_yes', 'Mostly yes', df$E0JS)
+  df$E0JS <- ifelse(df$E0JS == '5___completely_yes', 'Completely yes', df$E0JS)
+  df$E0JS <- ifelse(df$E0JS == 'don_t_know', "Don't know", df$E0JS)
+  
+  
+  #
+  #  Cleaning date.
+  #
   df$Date <- as.character(df$Date)
   df$Date <- ifelse(is.na(ymd(df$Date)) == FALSE, format(ymd(df$Date), '%Y-%m-%d'), as.character(df$Date))
   df$Date <- ifelse(is.na(dmy(df$Date)) == FALSE, format(dmy(df$Date), '%Y-%m-%d'), as.character(df$Date))
   
   df$Month <- month(ymd(df$Date))
+  
+  
+  #
+  #  Gender.
+  #
+  df$Gender <- capitalize(as.character(df$Gender))
   
   return(df)
 }
