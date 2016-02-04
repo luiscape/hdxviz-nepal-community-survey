@@ -62,6 +62,7 @@ var loadData = function () {
       // Demographics
       var map = dc.geoChoroplethChart('#map')
       var age_chart = dc.barChart('#age_chart')
+      var gender_chart = dc.pieChart('#gender_chart')
       var ethnicity_chart = dc.pieChart('#ethnicity_chart')
       var occupation_chart = dc.rowChart('#occupation_chart')
 
@@ -93,6 +94,7 @@ var loadData = function () {
       // Demographics
       cf.age = cf.dimension(function (d) { return d.Age })
       cf.round = cf.dimension(function (d) { return d.Round })
+      cf.gender = cf.dimension(function (d) { return d.Gender })
       cf.district = cf.dimension(function (d) { return d.District })
       cf.ethnicity = cf.dimension(function (d) { return d.Ethnicity })
       cf.occupation = cf.dimension(function (d) { return d.Occupation })
@@ -110,6 +112,7 @@ var loadData = function () {
       var all = cf.groupAll()
       var ages = cf.age.group()
       var rounds = cf.round.group()
+      var genders = cf.gender.group()
       var districts = cf.district.group()
       var ethnicities = cf.ethnicity.group()
       var occupations = cf.occupation.group()
@@ -152,7 +155,7 @@ var loadData = function () {
         .renderVerticalGridLines(true)
         .elasticY(true)
         .elasticX(false)
-        .x(d3.scale.ordinal().domain(['15_24', '25_39', '40_54', '55', '55_greater', 'refused', 'don_t_know']))
+        .x(d3.scale.ordinal().domain(['15 to 24', '25 to 39', '40 to 54', '55+', "Don't know", 'Refused']))
         .xUnits(dc.units.ordinal)
         .xAxis().tickFormat()
 
@@ -168,6 +171,18 @@ var loadData = function () {
         .renderTitle(false)
         .colorAccessor(function (d, i) { return i % 6 })
 
+      gender_chart
+        .width(500).height(170)
+        .dimension(cf.gender)
+        .group(genders)
+        .colors(['#d7191c', '#fdae61', '#ffffbf', '#abd9e9', '#2c7bb6'])
+        .colorDomain([0, 5])
+        .innerRadius(30)
+        .legend(dc.legend().x(2).y(30).itemHeight(13).gap(5))
+        .renderLabel(true)
+        .renderTitle(false)
+        .colorAccessor(function (d, i) { return i % 5 })
+
       dc.dataCount('#count-info')
         .dimension(cf)
         .group(all)
@@ -182,7 +197,7 @@ var loadData = function () {
         .renderVerticalGridLines(true)
         .elasticY(true)
         .elasticX(false)
-        .x(d3.scale.ordinal().domain(['1___not_at_all', '2___very_little', '3___neutral', '4___mostly_yes', '5___completely_yes', 'don_t_know', 'refused']))
+        .x(d3.scale.ordinal().domain(['Completely yes', 'Mostly yes', 'Neutral', 'Very little', 'Not at all', "Don't know", 'Refused']))
         .xUnits(dc.units.ordinal)
         .xAxis().tickFormat()
 
@@ -261,6 +276,13 @@ var loadData = function () {
           .attr('stroke', '#2c3e50')
           .attr('stroke-width', '2px')
           .attr('fill', 'none')
+
+        function tooltipText (d) {
+          return '<b>' + d.properties.DISTRICT + '</b>'
+        }
+        d3.selectAll('.DISTRICT')
+          .call(d3.helper.tooltip(function (d, i) { return tooltipText(d) }))
+
       }
 
       dc.renderAll()
