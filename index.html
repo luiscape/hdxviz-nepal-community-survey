@@ -44,7 +44,7 @@
     -->
     <script type="text/javascript" src="http/js/jquery.js"></script>
     <script type="text/javascript" src="http/js/d3.min.js"></script>
-    <script type="text/javascript" src="http://d3js.org/queue.v1.min.js"></script>
+    <script type="text/javascript" src="http/js/queue.v1.min.js"></script>
     <script type="text/javascript" src="http/js/topojson.js"></script>
     <script type="text/javascript" src="http/js/crossfilter.min.js"></script>
     <script type="text/javascript" src="http/js/dc.min.js"></script>
@@ -210,8 +210,6 @@
                 </div>
 
 
-
-
                 <div class="number-of-records-tooltip">
                     <div id="count-info">
                         <span class="fa fa-info-circle"></span> <span class="filter-count status-number"></span> of <span class="total-count"></span> <span><i>respondents</i></span>
@@ -219,25 +217,60 @@
                 </div>
                 <div id="map"></div>
             </div>
+
             <div class="row row-padding">
                 <div>
                     <h4><strong>Responses</strong></h4>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <p>
                         <span class="fa fa-info-circle"></span> <span><i>Are your main problems being addressed? <br/>(Answer on a scale of 1-5).</i></span>
                     </p>
                     <div id="A0JS"></div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <p>
-                        <span class="fa fa-info-circle"></span> <span><i>What is your biggest problem?</i></span>
+                        <span class="fa fa-info-circle"></span> <span><i>What is your biggest problem?<br/></i></span>
                     </p>
                     <div id="A1JS"></div>
                 </div>
             </div>
+
+            <div class="row row-padding">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <p>
+                        <span class="fa fa-info-circle"></span> <span><i>Are your main problems being addressed? <br/>(Answer on a scale of 1-5).</i></span>
+                    </p>
+                    <div id="B0JS"></div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <p>
+                        <span class="fa fa-info-circle"></span> <span><i>What is the top thing that you need information about?</i></span>
+                    </p>
+                    <div id="C1JS"></div>
+                </div>
+            </div>
+
+            <div class="row row-padding">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <p>
+                        <span class="fa fa-info-circle"></span> <span><i>Are you satisfied with what NGOs are doing for you after the earthquake?<br/>(Answer on a scale of 1-5)</i></span>
+                    </p>
+                    <div id="D0JS"></div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <p>
+                        <span class="fa fa-info-circle"></span> <span><i>Is support provided in a fair way?<br/>(Answer on a scale of 1-5)</i></span>
+                    </p>
+                    <div id="E0JS"></div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </body>

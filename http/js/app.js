@@ -69,6 +69,10 @@ var loadData = function () {
       // Questions
       var A0JS_chart = dc.barChart('#A0JS')
       var A1JS_chart = dc.barChart('#A1JS')
+      var B0JS_chart = dc.barChart('#B0JS')
+      var C1JS_chart = dc.barChart('#C1JS')
+      var D0JS_chart = dc.barChart('#D0JS')
+      var E0JS_chart = dc.barChart('#E0JS')
 
       /*
 
@@ -102,6 +106,10 @@ var loadData = function () {
       // Questions
       cf.a0js = cf.dimension(function (d) { return d.A0JS })
       cf.a1js = cf.dimension(function (d) { return d.A1JS })
+      cf.b0js = cf.dimension(function (d) { return d.B0JS })
+      cf.c1js = cf.dimension(function (d) { return d.C1JS })
+      cf.d0js = cf.dimension(function (d) { return d.D0JS })
+      cf.e0js = cf.dimension(function (d) { return d.E0JS })
 
       /*
 
@@ -121,6 +129,10 @@ var loadData = function () {
       // Questions
       var question_a0js = cf.a0js.group()
       var question_a1js = cf.a1js.group()
+      var question_b0js = cf.b0js.group()
+      var question_c1js = cf.c1js.group()
+      var question_d0js = cf.d0js.group()
+      var question_e0js = cf.e0js.group()
 
       /*
 
@@ -187,6 +199,7 @@ var loadData = function () {
         .dimension(cf)
         .group(all)
 
+      // Questions
       A0JS_chart
         .width(400)
         .height(250)
@@ -205,13 +218,69 @@ var loadData = function () {
         .width(400)
         .height(250)
         .colors(['#35978F'])
-        .margins({top: 20, left: 60, right: 30, bottom: 60})
+        .margins({top: 20, left: 60, right: 30, bottom: 100})
         .dimension(cf.a1js)
         .group(question_a1js)
         .renderVerticalGridLines(true)
         .elasticY(true)
         .elasticX(false)
-        .x(d3.scale.ordinal().domain(['long_term_shelter__housing', 'short_term_shelter__tent_shelt', 'financial_support', 'seeds_and_fertilizers', 'housing_inspections', 'clean_water', 'education', 'food', 'healthcare', 'livelihoods', 'other', 'psychosocial_counseling', 'toilets_sanitation', 'short_term_she', '']))
+        .x(d3.scale.ordinal().domain(['Long term shelter / housing', 'Short term shelter / tent shelter', 'Financial support', 'Clean water', 'Education', 'Food', 'Healthcare', 'Housing inspections', 'Livelihoods', 'Other', 'Psychosocial counseling', 'Seeds and fertilizers', 'Toilets sanitation', ' ']))
+        .xUnits(dc.units.ordinal)
+        .xAxis().tickFormat()
+
+      B0JS_chart
+        .width(400)
+        .height(250)
+        .colors(['#35978F'])
+        .margins({top: 20, left: 60, right: 30, bottom: 60})
+        .dimension(cf.b0js)
+        .group(question_b0js)
+        .renderVerticalGridLines(true)
+        .elasticY(true)
+        .elasticX(false)
+        .x(d3.scale.ordinal().domain(['Completely yes', 'Mostly yes', 'Neutral', 'Very little', 'Not at all', "Don't know", 'Refused']))
+        .xUnits(dc.units.ordinal)
+        .xAxis().tickFormat()
+
+      C1JS_chart
+        .width(400)
+        .height(250)
+        .colors(['#35978F'])
+        .margins({top: 20, left: 60, right: 30, bottom: 100})
+        .dimension(cf.c1js)
+        .group(question_c1js)
+        .renderVerticalGridLines(true)
+        .elasticY(true)
+        .elasticX(false)
+        .x(d3.scale.ordinal().domain(['News about government decision', 'Finding missing people', 'How to get shelter materials', 'How to register for access support', 'How to get healthcare psychological support', 'How to replace personal documentation', 'Other', ' ']))
+        .xUnits(dc.units.ordinal)
+        .xAxis().tickFormat()
+
+      D0JS_chart
+        .width(400)
+        .height(250)
+        .colors(['#35978F'])
+        .margins({top: 20, left: 60, right: 30, bottom: 60})
+        .dimension(cf.d0js)
+        .group(question_d0js)
+        .renderVerticalGridLines(true)
+        .elasticY(true)
+        .elasticX(false)
+        .x(d3.scale.ordinal().domain(['Completely yes', 'Mostly yes', 'Neutral', 'Very little', 'Not at all', "Don't know", 'Refused']))
+        .xUnits(dc.units.ordinal)
+        .xAxis().tickFormat()
+
+      E0JS_chart
+        .width(400)
+        .height(250)
+        .colors(['#35978F'])
+        .margins({top: 20, left: 60, right: 30, bottom: 60})
+        .dimension(cf.e0js)
+        .group(question_e0js)
+        .renderVerticalGridLines(true)
+        .elasticY(true)
+        .elasticX(false)
+        .x(d3.scale.ordinal().domain(['Completely yes', 'Mostly yes', 'Neutral', 'Very little', 'Not at all', "Don't know", 'Refused']))
         .xUnits(dc.units.ordinal)
         .xAxis().tickFormat()
 
