@@ -237,6 +237,26 @@ div.tooltip {
     transform: rotate(-45deg);
 }
 
+#B0JS .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
+}
+
+#C1JS .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
+}
+
+#D0JS .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
+}
+
+#E0JS .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
+}
+
 /* station.css */
 html {
   -webkit-background-size: cover;
@@ -284,6 +304,7 @@ path.mg-main-line {
   position:absolute;
   left:33.3333%;
   /*width:66.6666%;*/
+  overflow: auto;
   top:0 !important;
   bottom:0 !important;
   }
