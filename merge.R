@@ -153,6 +153,8 @@ cleanAndSelect <- function(df) {
     df$A1JS[i] <- capitalize(gsub("_", " ", entry))
     df$A1JS[i] <- gsub("  ", " / ", df$A1JS[i])
   }
+  df$A1JS <- ifelse(df$A1JS == 'Short term she', "Short term shelter / tent shelt", df$A1JS)
+  df$A1JS <- ifelse(df$A1JS == 'Short term shelter / tent shelt', "Short term shelter / tent shelter", df$A1JS)
   
   #
   #  Cleaning A2JS
@@ -184,7 +186,7 @@ cleanAndSelect <- function(df) {
   df$B0JS <- ifelse(df$B0JS == '4___mostly_yes', 'Mostly yes', df$B0JS)
   df$B0JS <- ifelse(df$B0JS == '5___completely_yes', 'Completely yes', df$B0JS)
   df$B0JS <- ifelse(df$B0JS == 'don_t_know', "Don't know", df$B0JS)
-  df$A0JS <- ifelse(df$B0JS == 'refused', "Refused", df$B0JS)
+  df$B0JS <- ifelse(df$B0JS == 'refused', "Refused", df$B0JS)
   
   #
   #  Cleaning C0JS
@@ -196,7 +198,7 @@ cleanAndSelect <- function(df) {
   df$C0JS <- ifelse(df$C0JS == '4___mostly_yes', 'Mostly yes', df$C0JS)
   df$C0JS <- ifelse(df$C0JS == '5___completely_yes', 'Completely yes', df$C0JS)
   df$C0JS <- ifelse(df$C0JS == 'don_t_know', "Don't know", df$C0JS)
-  df$A0JS <- ifelse(df$C0JS == 'refused', "Refused", df$C0JS)
+  df$C0JS <- ifelse(df$C0JS == 'refused', "Refused", df$C0JS)
   
   #
   #  Cleaning C1JS
@@ -207,6 +209,9 @@ cleanAndSelect <- function(df) {
     df$C1JS[i] <- capitalize(gsub("_", " ", entry))
     df$C1JS[i] <- gsub("  ", " / ", df$C1JS[i])
   }
+  df$C1JS <- ifelse(df$C1JS == 'How to get healthcare psycholo', 'How to get healthcare psychological support', df$C1JS)
+  df$C1JS <- ifelse(df$C1JS == 'How to register for access sup', 'How to register for access support', df$C1JS)
+  df$C1JS <- ifelse(df$C1JS == 'How to replace personal docume', 'How to replace personal documentation', df$C1JS)
   
   #
   #  Cleaning C2JS
@@ -228,7 +233,7 @@ cleanAndSelect <- function(df) {
   df$D0JS <- ifelse(df$D0JS == '4___mostly_yes', 'Mostly yes', df$D0JS)
   df$D0JS <- ifelse(df$D0JS == '5___completely_yes', 'Completely yes', df$D0JS)
   df$D0JS <- ifelse(df$D0JS == 'don_t_know', "Don't know", df$D0JS)
-  df$A0JS <- ifelse(df$D0JS == 'refused', "Refused", df$D0JS)
+  df$D0JS <- ifelse(df$D0JS == 'refused', "Refused", df$D0JS)
   
   #
   #  Cleaning E0JS
