@@ -303,7 +303,7 @@ var loadData = function () {
         .height(380)
         .dimension(cf.district)
         .group(total_per_district)
-        .colors(d3.scale.ordinal().range(['#f7fcf5', '#e5f5e0', '#c7e9c0', '#a1d99b', '#74c476', '#41ab5d']))
+        .colors(d3.scale.ordinal().range(['#41ab5d', '#74c476', '#a1d99b', '#c7e9c0', '#e5f5e0', '#f7fcf5']))
         .colorDomain([d3.min(function (d) { return d.n }), d3.max(function (d) { return d.n })])
         .colorCalculator(function (d) { return d ? map.colors()(d) : '#ecf0f1' })
         .overlayGeoJson(district_data.features, 'DISTRICT', function (d) {

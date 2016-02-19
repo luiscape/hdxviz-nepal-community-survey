@@ -10,6 +10,7 @@
 # ------------------------------------
 
 library(dplyr)
+library(readr)
 library(Hmisc)
 library(lubridate)
 
@@ -20,6 +21,8 @@ round1 <- read.csv('data/preprocessing/round1.csv', na.strings='n/a')
 round2 <- read.csv('data/preprocessing/round2.csv', na.strings='n/a')
 round3 <- read.csv('data/preprocessing/round3.csv')
 round4 <- read.csv('data/preprocessing/round4.csv')
+round5 <- read.csv('data/preprocessing/round5.csv')
+round6 <- read_csv('data/preprocessing/round6.csv')
 
 #
 #  Adding round label.
@@ -28,6 +31,8 @@ round1$Round <- 1
 round2$Round <- 2
 round3$Round <- 3
 round4$Round <- 4
+round5$Round <- 5
+round6$Round <- 6
 
 #
 #  Helper function. Helps identify
