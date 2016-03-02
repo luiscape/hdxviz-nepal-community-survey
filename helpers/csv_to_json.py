@@ -40,7 +40,7 @@ def CreateJson(data, output):
 
   try:
     with open(file_path, 'w') as outfile:
-      json.dump(data, outfile)
+      json.dump(data, outfile, encoding='ISO-8859-1')
 
     print("JSON file stored successfully.")
     print("JSON PATH: %s" % output)

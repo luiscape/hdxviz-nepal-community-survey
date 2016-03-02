@@ -7,7 +7,7 @@ body {
 
 h3 {
 	font-size: 16px;
-	font-weight: 800;
+	font-weight: 400;
 }
 
 h4 {
@@ -21,11 +21,12 @@ h5 {
 
 .top-bar {
   /*background: rgba(0,0,0,.6);*/
-  /* position: fixed; */
+  position: fixed;
   z-index: 1999;
   top: 0;
   left: 0;
   height: 100px;
+  padding-top: 50px;
 }
 
 .title {
@@ -278,7 +279,7 @@ path.mg-main-line {
 
 .status-number {
   /*font-family: 'Raleway';*/
-  font-size: 80px;
+  font-size: 50px;
   font-weight: 100;
 }
 
@@ -300,16 +301,10 @@ path.mg-main-line {
 
 */
 .map {
-  /*border-left:1px solid #fff;*/
-  position:absolute;
-  left:33.3333%;
-  /*width:66.6666%;*/
-  overflow: auto;
-  top:0 !important;
-  bottom:0 !important;
+  border-bottom: 0.2px solid rgba(0,0,0,0.1)
   }
 .pad2 {
-  padding:20px;
+  padding: 50px 0px 0px 15px;
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;
           box-sizing:border-box;
@@ -320,20 +315,23 @@ h1 {
   margin:0;
   font-weight:400;
 }
-a {
-  color:#404040;
-  text-decoration:none;
-}
 a:hover { color:#2980b9; }
 
 .sidebar {
-  position:absolute;
-  width:33.3333%;
-  height:100%;
-  top:0;
-  left:0;
-  overflow: auto;
-  border-right: 0px solid rgba(0,0,0,0.25);
+  position: relative;
+  width: 450px;
+  height: 1400px;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-right: 0.2px solid rgba(0,0,0,0.1);
+}
+
+.main-pannel {
+  height: 1400px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .quiet {
@@ -374,10 +372,10 @@ a:hover { color:#2980b9; }
 }
 
 ::-webkit-scrollbar {
-  width:3px;
+  width:1px;
   height:3px;
   border-left:0;
-  background:rgba(0,0,0,0.1);
+  background:rgba(0,0,0,0.0);
 }
 ::-webkit-scrollbar-track {
   background:none;
@@ -425,9 +423,9 @@ a:hover { color:#2980b9; }
 
 .roundButton { border-radius: 20px !important; }
 
-#map {
+/*#map {
   padding-left: 80px;
-}
+}*/
 
 .row-padding {
   padding-bottom: 30px;
@@ -527,3 +525,15 @@ a:hover { color:#2980b9; }
   top: 20px;
   background-color: #75C7F6;
 }
+
+.dc-chart g.row text {
+  fill: #000 !important;
+}
+
+.round-selector {
+  padding: 10px 0px 10px 0px;
+  /*border-bottom: 0.2px solid rgba(0,0,0,0.1);*/
+  /*border-left: 0.2px solid rgba(0,0,0,0.1);*/
+  /*text-align: center;*/
+}
+
