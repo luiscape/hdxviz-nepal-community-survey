@@ -171,11 +171,12 @@
         ============================================================
 
         -->
-        <div class="col-xs-8 pad2">
+        <div class="pad2 main-pannel">
 
             <div class="row map row-padding">
                 <div class="col-xs-9">
-                    <!-- <h1>Map of Responses</h4> -->
+                    <h3>Survey Responses Map</h3>
+                    <br/>
                     <div id="map"></div>
                 </div>
                 <div class="col-xs-3">
@@ -207,9 +208,39 @@
 
             </div>
 
+            <!--
+
+                3W: ====================================================
+
+                The 3W charts Who and What are out of place as follows.
+                This is a temporary solution that doesn't disrupt
+                the other charts. A better solution will very
+                likely come in place in the future.
+
+                =========================================================
+
+            -->
+
             <div class="row row-padding">
                 <div style='padding-bottom:20px;'></div>
+                <h3>Who is Doing What Where</h3>
+                <div class="col-xs-6">
+                    <p>
+                        <span class="fa fa-info-circle"></span> <span><i>Who (top 15 organizations)</i></span>
+                    </p>
+                    <div id="who"></div>
+                </div>
 
+                <div class="col-xs-6">
+                    <p>
+                        <span class="fa fa-info-circle"></span> <span><i>What (top 15 categories)</i></span>
+                    </p>
+                    <div id="what"></div>
+                </div>
+            </div>
+
+            <div class="row row-padding">
+                <h3>Survey Responses</h3>
                 <div class="col-xs-6">
                     <p>
                         <span class="fa fa-info-circle"></span> <span><i>Are your main problems being addressed? <br/>(Answer on a scale of 1-5).</i></span>
@@ -256,7 +287,6 @@
                     <div id="E0JS"></div>
                 </div>
             </div>
-
 
         </div>
     </div>

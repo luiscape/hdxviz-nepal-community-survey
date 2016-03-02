@@ -42,7 +42,8 @@ var loadData = function () {
   queue()
     .defer(d3.json, 'http/data/data.json')
     .defer(d3.json, 'http/data/adm3.json')
-    .await(function (error, data, district_data) {
+    .defer(d3.csv, 'http/data/3w.csv')
+    .await(function (error, data, district_data, data_3w) {
       if (error) {
         throw error
       }
@@ -74,6 +75,10 @@ var loadData = function () {
       var D0JS_chart = dc.rowChart('#D0JS')
       var E0JS_chart = dc.rowChart('#E0JS')
 
+      // 3W
+      var who_chart = dc.rowChart('#who')
+      var what_chart = dc.rowChart('#what')
+
       /*
 
         CROSSFILTER OBJECTS: ----------------------
@@ -86,6 +91,7 @@ var loadData = function () {
 
       */
       var cf = crossfilter(data)
+      var cf_3w = crossfilter(data_3w)
 
       /*
 
@@ -111,6 +117,11 @@ var loadData = function () {
       cf.d0js = cf.dimension(function (d) { return d.D0JS })
       cf.e0js = cf.dimension(function (d) { return d.E0JS })
 
+      // 3W data
+      cf_3w.district = cf_3w.dimension(function (d) { return d.District })
+      cf_3w.organization = cf_3w.dimension(function (d) { return d['Organization'] })
+      cf_3w.cluster = cf_3w.dimension(function (d) { return d['Cluster'] })
+
       /*
 
         Declaring Crossfilter groups.
@@ -134,6 +145,11 @@ var loadData = function () {
       var question_d0js = cf.d0js.group()
       var question_e0js = cf.e0js.group()
 
+      // 3W
+      var districts_3w = cf_3w.district.group()
+      var organizations = cf_3w.organization.group()
+      var clusters = cf_3w.cluster.group()
+
       /*
 
         CHARTING ELEMENTS: ---------------------------
@@ -154,8 +170,8 @@ var loadData = function () {
         .dimension(cf.occupation)
         .group(occupations)
         .elasticX(true)
-        .x(d3.scale.linear())
-        .gap(1)
+        .x(d3.scale.linear()).gap(1)
+        .xAxis().ticks(5)
 
       age_chart
         .width(400)
@@ -209,8 +225,8 @@ var loadData = function () {
         .dimension(cf.a0js)
         .group(question_a0js)
         .elasticX(true)
-        .x(d3.scale.linear())
-        .gap(1)
+        .x(d3.scale.linear()).gap(1)
+        .xAxis().ticks(5)
 
       A1JS_chart
         .width(300)
@@ -221,8 +237,8 @@ var loadData = function () {
         .dimension(cf.a1js)
         .group(question_a1js)
         .elasticX(true)
-        .x(d3.scale.linear())
-        .gap(1)
+        .x(d3.scale.linear()).gap(1)
+        .xAxis().ticks(5)
 
       B0JS_chart
         .width(300)
@@ -233,8 +249,8 @@ var loadData = function () {
         .dimension(cf.b0js)
         .group(question_b0js)
         .elasticX(true)
-        .x(d3.scale.linear())
-        .gap(1)
+        .x(d3.scale.linear()).gap(1)
+        .xAxis().ticks(5)
 
       C1JS_chart
         .width(300)
@@ -245,8 +261,8 @@ var loadData = function () {
         .dimension(cf.c1js)
         .group(question_c1js)
         .elasticX(true)
-        .x(d3.scale.linear())
-        .gap(1)
+        .x(d3.scale.linear()).gap(1)
+        .xAxis().ticks(5)
 
       D0JS_chart
         .width(300)
@@ -257,8 +273,8 @@ var loadData = function () {
         .dimension(cf.d0js)
         .group(question_d0js)
         .elasticX(true)
-        .x(d3.scale.linear())
-        .gap(1)
+        .x(d3.scale.linear()).gap(1)
+        .xAxis().ticks(5)
 
       E0JS_chart
         .width(300)
@@ -269,8 +285,35 @@ var loadData = function () {
         .dimension(cf.e0js)
         .group(question_e0js)
         .elasticX(true)
-        .x(d3.scale.linear())
-        .gap(1)
+        .x(d3.scale.linear()).gap(1)
+        .xAxis().ticks(5)
+
+      // 3W
+      who_chart
+        .width(300)
+        .height(200)
+        .colors(['#379adc'])
+        .colorAccessor(function (d, i) { return i })
+        .dimension(cf_3w.organization)
+        .group(organizations)
+        .elasticX(true)
+        .data(function (d) {
+          return d.top(15)
+        })
+        .xAxis().ticks(5)
+
+      what_chart
+        .width(300)
+        .height(200)
+        .dimension(cf_3w.cluster)
+        .group(clusters)
+        .elasticX(true)
+        .data(function (d) {
+          return d.top(15)
+        })
+        .colors(['#379adc'])
+        .colorAccessor(function (d, i) { return i })
+        .xAxis().ticks(5)
 
       /*
 
@@ -289,7 +332,7 @@ var loadData = function () {
       map
         .width(650)
         .height(380)
-        .dimension(cf.district)
+        .dimension(cf_3w.district)
         .group(total_per_district)
         .colors(d3.scale.ordinal().range(['#41ab5d', '#74c476', '#a1d99b', '#c7e9c0', '#e5f5e0', '#f7fcf5']))
         .colorDomain([d3.min(function (d) { return d.n }), d3.max(function (d) { return d.n })])
