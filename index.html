@@ -13,7 +13,7 @@
     -->
     <title>Nepal | Community Perceptions Survey</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <!--
 
     STYLES: ========================================
@@ -101,25 +101,37 @@
     -->
     <div class="top-bar"></div>
     <div class="container-fluid">
-        <div class="col-lg-4 col-md-12 col-sm-12 sidebar pad2 whiteBackground">
+        <div class="col-xs-4 sidebar pad2 whiteBackground">
+
+            <!--
+
+            SIDE PANNEL: =================================================
+
+            This side panel hosts the survey's demographic information.
+
+            ==============================================================
+            -->
             <div class="bikes-panel">
+
+                <!-- HEADER -->
                 <div>
                     <div style='padding-bottom: 20px;'>
                         <a href="http://hdx.rwlabs.org">
                             <img src='http/img/hdx-logo.svg'>
                         </a>
                     </div>
+
                     <h1 style="padding-bottom: 20px;">Nepal: Community Perceptions Survey</h1>
                     <p>
                         This prototype visualizes the Community Perceptions Survey done in the affected regions after the Nepal earthquake
                     </p>
+
                     <a class="btn btn-primary" href="https://data.hdx.rwlabs.org/organization/nepal-unrchco?sort=metadata_modified+desc" target="_blank">Download Dataset from HDX</a>
+
                     <a class="reset btn btn-primary" onclick="clearAllFilters();">Clear Selection</a>
                 </div>
-                <div id="plot"></div>
-                <div class="row">
-                    <div class="col-xs-4 col-push-sm-12"></div>
-                </div>
+
+                <!-- CHARTS -->
                 <div class="row row-padding" style="padding-top: 20px;">
                     <h4><strong>Population Demographics</strong></h4>
                     <p>
@@ -147,28 +159,54 @@
                     </p>
                     <div id="gender_chart"></div>
                 </div>
-            </div>
-            <div class="row listings">
-                <div id='listings' class='listings'></div>
+
             </div>
         </div>
         <!--
 
         MAP AREA: =================================================
 
-        Here we render the map. We are also considering rendering
-        other
+        Here we render the map and the survey questions.
 
         ============================================================
 
         -->
-        <div class="col-lg-8 map pad2">
-            <div class="row row-padding">
-                <div>
-                    <h4><strong>Respondents Map</strong></h4>
+        <div class="col-xs-8 pad2">
+
+            <div class="row map row-padding">
+                <div class="col-xs-9">
+                    <!-- <h1>Map of Responses</h4> -->
+                    <div id="map"></div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="row round-selector">
+                        <div id="count-info">
+                            <span class="filter-count status-number"></span>
+                            <br>responses selected.
+                        </div>
+                    </div>
+                    <div class="row round-selector">
+                        <span class="fa fa-angle-right"></span> <strong>Round 1</strong> | 1304 responses.
+                    </div>
+                    <div class="row round-selector">
+                        <span class="fa fa-angle-right"></span> <strong>Round 2</strong> | 1398 responses.
+                    </div>
+                    <div class="row round-selector">
+                        <span class="fa fa-angle-right"></span> <strong>Round 3</strong> | 1400 responses.
+                    </div>
+                    <div class="row round-selector">
+                        <span class="fa fa-angle-right"></span> <strong>Round 4</strong> | 1400 responses.
+                    </div>
+                    <div class="row round-selector">
+                        <span class="fa fa-angle-right"></span> <strong>Round 5</strong> | 1400 responses.
+                    </div>
+                    <div class="row round-selector">
+                        <span class="fa fa-angle-right"></span> <a onclick="filterRound(1);"><strong>Round 6</strong></a> | 1400 responses.
+                    </div>
                 </div>
 
-                <div>
+
+         <!--        <div>
                     <ul class="timeline" id="timeline">
                       <li class="li" onclick="filterRound(1);">
                         <div class="timestamp">
@@ -227,28 +265,23 @@
                      </ul>
                 </div>
 
+ -->
 
-                <div class="number-of-records-tooltip">
-                    <div id="count-info">
-                        <span class="fa fa-info-circle"></span> <span class="filter-count status-number"></span> of <span class="total-count"></span> <span><i>respondents</i></span>
-                    </div>
-                </div>
-                <div id="map"></div>
             </div>
 
             <div class="row row-padding">
-                <div>
-                    <h4><strong>Responses</strong></h4>
+                <div style='padding-bottom:20px;'>
+                    <!-- <h4><strong>Responses</strong></h4> -->
                 </div>
 
-                <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-xs-6">
                     <p>
                         <span class="fa fa-info-circle"></span> <span><i>Are your main problems being addressed? <br/>(Answer on a scale of 1-5).</i></span>
                     </p>
                     <div id="A0JS"></div>
                 </div>
 
-                <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-xs-6">
                     <p>
                         <span class="fa fa-info-circle"></span> <span><i>What is your biggest problem?<br/></i></span>
                     </p>
@@ -257,14 +290,14 @@
             </div>
 
             <div class="row row-padding">
-                <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-xs-6">
                     <p>
                         <span class="fa fa-info-circle"></span> <span><i>Are your main problems being addressed? <br/>(Answer on a scale of 1-5).</i></span>
                     </p>
                     <div id="B0JS"></div>
                 </div>
 
-                <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-xs-6">
                     <p>
                         <span class="fa fa-info-circle"></span> <span><i>What is the top thing that you need information about?</i></span>
                     </p>
@@ -273,14 +306,14 @@
             </div>
 
             <div class="row row-padding">
-                <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-xs-6">
                     <p>
                         <span class="fa fa-info-circle"></span> <span><i>Are you satisfied with what NGOs are doing for you after the earthquake?<br/>(Answer on a scale of 1-5)</i></span>
                     </p>
                     <div id="D0JS"></div>
                 </div>
 
-                <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-xs-6">
                     <p>
                         <span class="fa fa-info-circle"></span> <span><i>Is support provided in a fair way?<br/>(Answer on a scale of 1-5)</i></span>
                     </p>
