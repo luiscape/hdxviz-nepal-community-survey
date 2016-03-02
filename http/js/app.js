@@ -212,19 +212,6 @@ var loadData = function () {
         .x(d3.scale.linear())
         .gap(1)
 
-      // .width(400)
-        // .height(250)
-        // .colors(['#35978F'])
-        // .margins({top: 20, left: 60, right: 30, bottom: 60})
-        // .dimension(cf.a0js)
-        // .group(question_a0js)
-        // .renderVerticalGridLines(true)
-        // .elasticY(true)
-        // .elasticX(false)
-        // .x(d3.scale.ordinal().domain(['Completely yes', 'Mostly yes', 'Neutral', 'Very little', 'Not at all', "Don't know", 'Refused']))
-        // .xUnits(dc.units.ordinal)
-        // .xAxis().tickFormat()
-
       A1JS_chart
         .width(300)
         .height(200)
@@ -236,19 +223,6 @@ var loadData = function () {
         .elasticX(true)
         .x(d3.scale.linear())
         .gap(1)
-
-      // .width(400)
-        // .height(250)
-        // .colors(['#35978F'])
-        // .margins({top: 20, left: 60, right: 30, bottom: 100})
-        // .dimension(cf.a1js)
-        // .group(question_a1js)
-        // .renderVerticalGridLines(true)
-        // .elasticY(true)
-        // .elasticX(false)
-        // .x(d3.scale.ordinal().domain(['Long term shelter / housing', 'Short term shelter / tent shelter', 'Financial support', 'Clean water', 'Education', 'Food', 'Healthcare', 'Housing inspections', 'Livelihoods', 'Other', 'Psychosocial counseling', 'Seeds and fertilizers', 'Toilets sanitation', ' ']))
-        // .xUnits(dc.units.ordinal)
-        // .xAxis().tickFormat()
 
       B0JS_chart
         .width(300)
@@ -262,19 +236,6 @@ var loadData = function () {
         .x(d3.scale.linear())
         .gap(1)
 
-      // .width(400)
-        // .height(250)
-        // .colors(['#35978F'])
-        // .margins({top: 20, left: 60, right: 30, bottom: 60})
-        // .dimension(cf.b0js)
-        // .group(question_b0js)
-        // .renderVerticalGridLines(true)
-        // .elasticY(true)
-        // .elasticX(false)
-        // .x(d3.scale.ordinal().domain(['Completely yes', 'Mostly yes', 'Neutral', 'Very little', 'Not at all', "Don't know", 'Refused']))
-        // .xUnits(dc.units.ordinal)
-        // .xAxis().tickFormat()
-
       C1JS_chart
         .width(300)
         .height(200)
@@ -286,19 +247,6 @@ var loadData = function () {
         .elasticX(true)
         .x(d3.scale.linear())
         .gap(1)
-
-      // .width(400)
-        // .height(250)
-        // .colors(['#35978F'])
-        // .margins({top: 20, left: 60, right: 30, bottom: 100})
-        // .dimension(cf.c1js)
-        // .group(question_c1js)
-        // .renderVerticalGridLines(true)
-        // .elasticY(true)
-        // .elasticX(false)
-        // .x(d3.scale.ordinal().domain(['News about government decision', 'Finding missing people', 'How to get shelter materials', 'How to register for access support', 'How to get healthcare psychological support', 'How to replace personal documentation', 'Other', ' ']))
-        // .xUnits(dc.units.ordinal)
-        // .xAxis().tickFormat()
 
       D0JS_chart
         .width(300)
@@ -312,19 +260,6 @@ var loadData = function () {
         .x(d3.scale.linear())
         .gap(1)
 
-      // .width(400)
-        // .height(250)
-        // .colors(['#35978F'])
-        // .margins({top: 20, left: 60, right: 30, bottom: 60})
-        // .dimension(cf.d0js)
-        // .group(question_d0js)
-        // .renderVerticalGridLines(true)
-        // .elasticY(true)
-        // .elasticX(false)
-        // .x(d3.scale.ordinal().domain(['Completely yes', 'Mostly yes', 'Neutral', 'Very little', 'Not at all', "Don't know", 'Refused']))
-        // .xUnits(dc.units.ordinal)
-        // .xAxis().tickFormat()
-
       E0JS_chart
         .width(300)
         .height(200)
@@ -336,19 +271,6 @@ var loadData = function () {
         .elasticX(true)
         .x(d3.scale.linear())
         .gap(1)
-
-      // .width(400)
-        // .height(250)
-        // .colors(['#35978F'])
-        // .margins({top: 20, left: 60, right: 30, bottom: 60})
-        // .dimension(cf.e0js)
-        // .group(question_e0js)
-        // .renderVerticalGridLines(true)
-        // .elasticY(true)
-        // .elasticX(false)
-        // .x(d3.scale.ordinal().domain(['Completely yes', 'Mostly yes', 'Neutral', 'Very little', 'Not at all', "Don't know", 'Refused']))
-        // .xUnits(dc.units.ordinal)
-        // .xAxis().tickFormat()
 
       /*
 
