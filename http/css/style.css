@@ -315,10 +315,6 @@ h1 {
   margin:0;
   font-weight:400;
 }
-a {
-  color:#404040;
-  text-decoration:none;
-}
 a:hover { color:#2980b9; }
 
 .sidebar {
