@@ -1,14 +1,12 @@
 /*
 
-   FLOWMINDER NEPAL: -----------------------------------
+   NEPAL COMMUNITY SURVEY DASHBOARD: -------------------
 
-   Example visualization designed for training purposes.
-   This visualization represents flows above normal (for
-   August) and the population still away from their
-   original location.
+   Here we visualize the Nepal community surveys available
+   on the Humanitarian Data Exchange website:
 
    -----------------------------------------------------
-   Author: Luis Capelo (luis.capelo@flowminder.org)
+   Author: Luis Capelo (capelo@un.org)
    -----------------------------------------------------
 
 */
@@ -30,14 +28,77 @@ function print_filter (filter) {
 
 /*
 
-  DATA LOADING: -----------------------------
+  STOP GAP: ------------------------------------
 
-  Here we load heavy data files asynchronously
-  using queue.js.
+  Here we are mokey-patchin the DC.js original
+  dataCount() function for allowing the aggregation
+  of its displayed figure. Before rendering
+  the figure on the DOM, this will not allow
+  that number to below a certain arbitrary integer.
 
-  -------------------------------------------
+  ----------------------------------------------
 
 */
+var LIMIT = 20
+dc.dataCount = function (parent, chartGroup) {
+  var _formatNumber = d3.format(',d')
+  var _chart = dc.baseMixin({})
+  var _html = {some: '', all: ''}
+  var _checkAnonimityLimit = function (limit, figure) {
+    if (parseInt(figure.replace(',', '')) > limit) {
+      return figure
+    } else {
+      console.warn('Too low of integer detected. Activating stop gap.')
+      return limit + '*'
+    }
+  }
+
+  _chart.html = function (options) {
+    if (!arguments.length) {
+      return _html
+    }
+    if (options.all) {
+      _html.all = options.all
+    }
+    if (options.some) {
+      _html.some = options.some
+    }
+    return _chart
+  }
+
+  _chart.formatNumber = function (formatter) {
+    if (!arguments.length) {
+      return _formatNumber
+    }
+    _formatNumber = formatter
+    return _chart
+  }
+
+  _chart._doRender = function () {
+    var tot = _chart.dimension().size(),
+      val = _chart.group().value()
+    var all = _formatNumber(tot)
+    var selected = _formatNumber(val)
+    selected = _checkAnonimityLimit(LIMIT, selected)
+
+    if ((tot === val) && (_html.all !== '')) {
+      _chart.root().html(_html.all.replace('%total-count', all).replace('%filter-count', selected))
+    } else if (_html.some !== '') {
+      _chart.root().html(_html.some.replace('%total-count', all).replace('%filter-count', selected))
+    } else {
+      _chart.selectAll('.total-count').text(all)
+      _chart.selectAll('.filter-count').text(selected)
+    }
+    return _chart
+  }
+
+  _chart._doRedraw = function () {
+    return _chart._doRender()
+  }
+
+  return _chart.anchor(parent, chartGroup)
+}
+
 var loadData = function () {
   queue()
     .defer(d3.json, 'http/data/data.json')
