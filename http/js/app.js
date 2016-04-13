@@ -49,7 +49,7 @@ dc.dataCount = function (parent, chartGroup) {
       return figure
     } else {
       console.warn('Too low of integer detected. Activating stop gap.')
-      return limit + '*'
+      return '< ' + limit + '*'
     }
   }
 
